@@ -21,6 +21,7 @@ export default {
     gray_c4: '#c4c4c4',
     gray_dd: '#ddd',
     gray_ed: '#ededed',
+    gray_eb: '#ebebeb',
     gray_e5: '#e5e5e5',
     gray_f7: '#f7f7f7',
     dark_cyan: '#008489',
