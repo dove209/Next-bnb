@@ -1,8 +1,15 @@
 import React from 'react'
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import palette from '../../styles/palette';
+import { useSelector } from '../../store';
 
-const Container = styled.div<{ iconExist: boolean }>`
+type InputContainerProps = {
+    iconExist: boolean;     //아이콘 유무
+    isValid: boolean;       //값이 유요한지
+    useValidation: boolean; //밸리데이션 사용 유무
+}
+
+const Container = styled.div<InputContainerProps>`
     input {
         position: relative;
         width: 100%;
@@ -19,25 +26,61 @@ const Container = styled.div<{ iconExist: boolean }>`
             border-color: ${palette.dark_cyan} !important;
         }
     }
-    .input-icon-wrapper {
+    svg {
         position: absolute;
-        top: 0;
         right: 11px;
-        height: 46px;
-        display: flex;
-        align-items: center;
+        top:50%;
+        transform: translateY(-50%);
     }
+    .input-error-message {
+        margin-top: 8px;
+        font-weight: 600;
+        font-size: 14px;
+        color: ${palette.tawny};
+    }
+    ${({ useValidation, isValid }) =>
+        useValidation &&
+        !isValid &&
+        css`
+            input {
+                background-color: ${palette.snow};
+                border-color: ${palette.orange};
+                &:focus {
+                    border-color: ${palette.orange};
+                }
+            }
+        `}
+    
+    ${({ useValidation, isValid }) =>
+        useValidation && isValid &&
+        css`
+            input {
+                border-color: ${palette.dark_cyan}
+            }
+        `} 
 `;
 
 interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
     icon?: JSX.Element; //icon: JSX.Element | undefined; 같은거
+    isValid?: boolean;
+    validataMode?: boolean;
+    useValidation?: boolean;
+    errorMessage?: string;
 }
 
-const Input: React.FC<IProps> = ({ icon, ...props }) => {
+const Input: React.FC<IProps> = ({ icon, isValid = false, useValidation = true, errorMessage, ...props }) => {
+    const validataMode = useSelector((state) => state.common.validateMode)
     return (
-        <Container iconExist={!!icon}>
+        <Container
+            iconExist={!!icon}
+            isValid={isValid}
+            useValidation={validataMode && useValidation}
+        >
             <input {...props} />
-            <div className='input-icon-wrapper'>{icon}</div>
+            {icon}
+            {useValidation && validataMode && !isValid && errorMessage && (
+                <p className='input-error-message'>{errorMessage}</p>
+            )}
         </Container>
     );
 };

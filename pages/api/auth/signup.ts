@@ -48,7 +48,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             `access_token=${token}; path=/; expires=${new Date(Date.now() + 60 * 60 * 24 * 1000 * 3).toISOString()}; httponly`
         ); //3일 만료
 
-        return res.end();
+        const newUserWithoutPassword: Partial<Pick<StoredUserType, 'password'>> = newUser;
+
+        delete newUserWithoutPassword.password;
+        res.statusCode = 200;
+
+        return res.send(newUser);
     }
 
     res.statusCode = 405;

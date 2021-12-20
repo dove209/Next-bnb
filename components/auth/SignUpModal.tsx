@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 import CloseXIcon from '../../public/static/svg/modal/modal_close_x_icon.svg';
 import MailIcon from '../../public/static/svg/auth/mail.svg';
@@ -11,6 +11,11 @@ import Button from '../common/Button';
 import { monthList, dayList, yearList } from '../../lib/staticData';
 import palette from '../../styles/palette';
 import { signupAPI } from '../../lib/api/auth';
+
+import { useDispatch } from 'react-redux';
+import { userActions } from '../../store/user';
+
+import useValidataMode from '../../hooks/useValidataMode';
 
 const Container = styled.div`
     width: 568px;
@@ -71,7 +76,12 @@ const Container = styled.div`
     }
 `;
 
-const SignUpModal: React.FC = () => {
+interface IProps {
+    closeModal: () => void;
+}
+
+
+const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
     const [email, setEmail] = useState('');
     const [lastname, setLastname] = useState('');
     const [firstname, setFirstname] = useState('');
@@ -82,6 +92,16 @@ const SignUpModal: React.FC = () => {
     const [birthDay, setBirthDay] = useState<string | undefined>();
     const [birthMonth, setBirthMonth] = useState<string | undefined>();
 
+    const dispatch = useDispatch();
+
+    const { setVaildateMode } = useValidataMode();
+
+
+    useEffect(() => {
+        return () => {
+            setVaildateMode(false);
+        }
+    }, [])
 
     // 이메일 주소 변경시
     const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -122,8 +142,14 @@ const SignUpModal: React.FC = () => {
     }
 
     // 회원가입 폼 제출하기
-    const onSubmitSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
+    const onSubmitSignUp = async (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
+
+        setVaildateMode(true);
+
+        if (!email || !lastname || !firstname || !password) {
+            return undefined;
+        }
 
         try {
             const signUpBody = {
@@ -135,7 +161,9 @@ const SignUpModal: React.FC = () => {
                     `${birthYear}-${birthMonth!.replace('월', '')}-${birthDay}`
                 ).toISOString(),
             };
-            await signupAPI(signUpBody)
+            const { data } = await signupAPI(signUpBody);
+
+            dispatch(userActions.setLoggedUser(data));
         } catch (err) {
             console.log(err)
         }
@@ -143,16 +171,16 @@ const SignUpModal: React.FC = () => {
 
     return (
         <Container>
-            <CloseXIcon className='modal-colose-x-icon' />
+            <CloseXIcon className='modal-colose-x-icon' onClick={closeModal} />
             <div className='input-wrapper'>
-                <Input placeholder='이메일 주소' type={'email'} name='email' icon={<MailIcon />} value={email} onChange={onChangeEmail} />
+                <Input placeholder='이메일 주소' type={'email'} name='email' icon={<MailIcon />} value={email} onChange={onChangeEmail} useValidation isValid={!!email} errorMessage='이메일이 필요합니다.' />
 
             </div>
             <div className='input-wrapper'>
-                <Input placeholder='이름(예:길동)' icon={<PersonIcon />} value={lastname} onChange={onChangeLastName} />
+                <Input placeholder='이름(예:길동)' icon={<PersonIcon />} value={lastname} onChange={onChangeLastName} useValidation isValid={!!lastname} errorMessage='이름을 입력하세요.' />
             </div>
             <div className='input-wrapper'>
-                <Input placeholder='성(예:홍)' icon={<PersonIcon />} value={firstname} onChange={onChangeFirstName} />
+                <Input placeholder='성(예:홍)' icon={<PersonIcon />} value={firstname} onChange={onChangeFirstName} useValidation isValid={!!firstname} errorMessage='성을 입력하세요' />
             </div>
             <div className='input-wrapper sign-up-password-input-wrapper'>
                 <Input
@@ -161,6 +189,7 @@ const SignUpModal: React.FC = () => {
                     icon={hidePassword ? <OpenedEyeIcon onClick={toggleHidePassword} /> : <ClosedEyeIcon onClick={toggleHidePassword} />}
                     value={password}
                     onChange={onChangePassword}
+                    useValidation isValid={!!password} errorMessage='비밀번호를 입력하세요.'
                 />
             </div>
             <p className='sign-up-birthday-label'>
