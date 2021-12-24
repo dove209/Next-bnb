@@ -13,3 +13,7 @@ interface SingUpAPIBody {
 // 회원가입 api
 export const signupAPI = (body: SingUpAPIBody) =>
     axios.post<UserType>('/api/auth/signup', body)
+
+// 로그인 api
+export const loginApi = (body: { email: string; password: string }) =>
+    axios.post<UserType>('/api/auth/login', body)

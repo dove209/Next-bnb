@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import { readFileSync, writeFileSync } from "fs";
 import { StoredUserType } from "../../types/user";
 
@@ -24,4 +25,10 @@ const write = (users: StoredUserType[]) => {
     writeFileSync('data/user.json', JSON.stringify(users));
 }
 
-export default { getList, exist, write };
+// email의 유저 불러오기
+const find = ({ email }: { email: string }) => {
+    const users = getList();
+    return users.find((user) => user.email === email);
+}
+
+export default { getList, exist, write, find };
