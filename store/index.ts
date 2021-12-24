@@ -4,10 +4,12 @@ import { TypedUseSelectorHook, useSelector as useReduxSelector } from "react-red
 import { AnyAction, Store } from 'redux';
 import user from './user';
 import common from "./common";
+import auth from './auth';
 
 const rootReducer = combineReducers({
     common: common.reducer,
     user: user.reducer,
+    auth: auth.reducer,
 })
 
 // 스토어 타입

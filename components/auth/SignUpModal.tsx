@@ -15,6 +15,7 @@ import { signupAPI } from '../../lib/api/auth';
 
 import { useDispatch } from 'react-redux';
 import { userActions } from '../../store/user';
+import { authActions } from '../../store/auth';
 
 import useValidataMode from '../../hooks/useValidataMode';
 
@@ -229,6 +230,11 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
         }
     }
 
+    // 로그인 모달로 변경하기
+    const changeToLoginModal = () => {
+        dispatch(authActions.setAuthMode('login'));
+    }
+
     return (
         <Container>
             <CloseXIcon className='modal-colose-x-icon' onClick={closeModal} />
@@ -290,7 +296,7 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
 
             <p>
                 이미 에어비앤비 계정이 있나요?
-                <span className='sign-up-modal-set-login' role='presentation' onClick={() => { }}>
+                <span className='sign-up-modal-set-login' role='presentation' onClick={changeToLoginModal}>
                     로그인
                 </span>
             </p>
