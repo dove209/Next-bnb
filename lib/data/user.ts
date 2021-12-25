@@ -25,10 +25,10 @@ const write = (users: StoredUserType[]) => {
     writeFileSync('data/user.json', JSON.stringify(users));
 }
 
-// email의 유저 불러오기
-const find = ({ email }: { email: string }) => {
+// email 또는 id의 유저 불러오기
+const find = ({ email, id }: { email?: string, id?: number }) => {
     const users = getList();
-    return users.find((user) => user.email === email);
+    return users.find((user) => user.email === email || user.id === id );
 }
 
 export default { getList, exist, write, find };

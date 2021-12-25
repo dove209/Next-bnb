@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "../store";
 import { commonActions } from "../store/common";
 
-export default () => {
+const useValidataMode = () => {
     const dispatch = useDispatch();
     const validataMode = useSelector((state) => state.common.validateMode);
 
@@ -14,4 +14,4 @@ export default () => {
     return { validataMode, setVaildateMode }
 };
 
-
+export default useValidataMode;

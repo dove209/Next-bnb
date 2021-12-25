@@ -19,4 +19,4 @@ export const loginApi = (body: { email: string; password: string }) =>
     axios.post<UserType>('/api/auth/login', body)
 
 // 쿠키의 access_token의 유저 정보 받아오는 api
-export const meAPI = () => axios.get<UserType>('/api/auth/me');
+export const meAPI = (access_token: string) => axios.get<UserType>('http://localhost:3000/api/auth/me',{headers:{cookie:access_token}});
