@@ -23,6 +23,7 @@ MyApp.getInitialProps = wrapper.getInitialAppProps(
     const appInitialPrps = await App.getInitialProps(context);
     const cookieObject = cookieStringToObject(context.ctx.req?.headers.cookie);
     const { isLogged } = store.getState().user;
+
     try {
       if (!isLogged && cookieObject.access_token) {
         const { data } = await meAPI(cookieObject.access_token);

@@ -31,7 +31,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             const token = jwt.sign(String(user.id), process.env.JWT_SECRET);
             res.setHeader(
                 "Set-Cookie",
-                `accecc_token=${token}; path=/; expires=${new Date(Date.now() + 60 * 60 * 24 * 1000 * 3).toISOString()}; httponly`
+                `access_token=${token}; path=/; expires=${new Date(Date.now() + 60 * 60 * 24 * 1000 * 3).toISOString()}; httponly`
             )
 
             const userWithoutPassword: Partial<Pick<
@@ -41,6 +41,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
             delete userWithoutPassword.password;
             res.statusCode = 200;
+
             return res.send(user);
 
         } catch (err) {
@@ -48,7 +49,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             res.statusCode = 500;
             return res.send(err)
         }
-        return res.end();
     }
     res.statusCode = 405;
 
