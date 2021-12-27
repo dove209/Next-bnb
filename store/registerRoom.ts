@@ -1,10 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { stat } from 'fs';
 
 type RegisterRoomState = {
     largeBuildingType: string | null;
-    buildingType: string | null;     
-    roomType: string | null;         
-    isSetUpForGeust: boolean | null; 
+    buildingType: string | null;
+    roomType: string | null;
+    isSetUpForGeust: boolean | null;
 };
 
 
@@ -23,7 +24,34 @@ const initialState: RegisterRoomState = {
 const registerRoom = createSlice({
     name: 'registerRoom',
     initialState,
-    reducers: {},
+    reducers: {
+        // 건물 유형 큰 범주 변경하기
+        setLargeBuildingType(state, action: PayloadAction<string>) {
+            if (action.payload === '') {
+                state.largeBuildingType = null;
+            }
+            state.largeBuildingType = action.payload;
+            return state;
+        },
+        // 건물 유형 변경하기
+        setBuildingType(state, action: PayloadAction<string>) {
+            if (action.payload === '') {
+                state.buildingType = null;
+            }
+            state.buildingType = action.payload;
+            return state;
+        },
+        // 숙소 유형 변경하기
+        setRoomType(state, action: PayloadAction<'entire' | 'private' | 'public'>) {
+            state.roomType = action.payload;
+            return state;
+        },
+        // 게스트용 숙소인지 변경하기
+        setIsSetUpForGuest(state, action: PayloadAction<boolean>) {
+            state.isSetUpForGeust = action.payload;
+            return state;
+        }
+    },
 });
 
 export const registerRoomActions = { ...registerRoom };
