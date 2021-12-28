@@ -1,5 +1,4 @@
 // token=value를 {token: 'value'}로 바꾸는 함수
-
 export const cookieStringToObject = (cookieString: string | undefined) => {
     const cookies: { [key: string]: string } = {};
     if (cookieString) {
@@ -13,3 +12,13 @@ export const cookieStringToObject = (cookieString: string | undefined) => {
     }
     return cookies;
 }
+
+// string에서 number만 return 하는 함수
+// 예시) 침실 3개 => 3 리턴
+export const getNumber = (string: string) => {
+    const numbers = string.match(/\d/g)?.join("");
+    if (numbers) {
+        return Number(numbers);
+    }
+    return null;
+};
