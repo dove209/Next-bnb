@@ -139,6 +139,15 @@ const RegisterRoomBuilding: React.FC = () => {
   }, [largeBuildingType])
 
 
+  // 모든 값이 있는지 확인하기
+  const isValid = useMemo(() => {
+    if (!largeBuildingType || !buildingType || !roomType || !isSetUpForGuest === null) {
+      return false;
+    }
+    return true;
+  }, [largeBuildingType, buildingType, roomType, isSetUpForGuest]);
+
+
   return (
     <Conatainer>
       <h2>등록할 숙소 종류는 무엇인가요?</h2>
@@ -149,6 +158,7 @@ const RegisterRoomBuilding: React.FC = () => {
           value={largeBuildingType || undefined}
           defaultValue='하나를 선택해주세요.'
           disabledOptions={disablelargeBuildingTypeOptions}
+          isValid={!!largeBuildingType}
           label='우선 범위를 좁혀볼까요?'
           options={largeBuidingTypeList}
           onChange={onChangeLargeBuildingType}
@@ -160,6 +170,7 @@ const RegisterRoomBuilding: React.FC = () => {
           type='register'
           value={buildingType || undefined}
           disabled={!largeBuildingType}
+          isValid={!!buildingType}
           label='건물 유형을 선택하세요'
           options={detailBuildingOptions}
           onChange={onChangeBuildingType}
@@ -170,6 +181,7 @@ const RegisterRoomBuilding: React.FC = () => {
         <>
           <div className="register-room-room-type-radio">
             <RadioGroup
+              isValid={!!roomType}
               label='게스트가 묵게 될 숙소 유형을 골라주세요.'
               value={roomType}
               options={roomTypeRadioOptions}
@@ -179,6 +191,7 @@ const RegisterRoomBuilding: React.FC = () => {
 
           <div className="register-room-is-setup-for-geust-radio">
             <RadioGroup
+              isValid={isSetUpForGuest !== null}
               label='게스트만 사용하도록 만들어진 숙소인가요?'
               value={isSetUpForGuest}
               options={isSetUpForGyestOptions}
@@ -189,7 +202,7 @@ const RegisterRoomBuilding: React.FC = () => {
       )}
 
       <RegisterRoomFooter
-        isValid={false}
+        isValid={isValid}
         prevHref="/"
         nextHref="/room/register/bedrooms"
       />
