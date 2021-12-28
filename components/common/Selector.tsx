@@ -63,19 +63,19 @@ const Container = styled.div<SelectorContainerProps>`
 
   select {
     ${({ validateMode, isValid }) => {
-      if (validateMode) {
-        if (!isValid) {
-          return css`
+    if (validateMode) {
+      if (!isValid) {
+        return css`
             border-color: ${palette.tawny};
             background-color: ${palette.snow};
           `;
-        }
-        return css`
+      }
+      return css`
           border-color: ${palette.dark_cyan};
         `;
-      }
-      return undefined;
-    }}
+    }
+    return undefined;
+  }}
 
     &:disabled {
       background: url("/static/svg/common/selector/disabled_register_selector_down_arrow.svg")
@@ -87,7 +87,7 @@ const Container = styled.div<SelectorContainerProps>`
     }
   }
 
-  .selector_warnig {
+  .selector-warning {
     margin-top: 8px;
     display: flex;
     align-items: center;

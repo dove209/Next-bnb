@@ -3,6 +3,7 @@ import styled from "styled-components";
 import palette from "../../../styles/palette";
 import Selector from "../../common/Selector";
 import RadioGroup from "../../common/RadioGroup";
+import RegisterRoomFooter from "./RegisterRoomFooter";
 
 import { largeBuidingTypeList } from "../../../lib/staticData";
 import { useSelector } from "../../../store";
@@ -61,7 +62,7 @@ const roomTypeRadioOptions = [
 // 게스트만 사용하도록 만들어진 숙소인지 라디오 options
 const isSetUpForGyestOptions = [
   {
-    label: '예, 게스느용으로 따로 마련된 숙소입니다.',
+    label: '예, 게스트용으로 따로 마련된 숙소입니다.',
     value: true,
   },
   {
@@ -186,6 +187,12 @@ const RegisterRoomBuilding: React.FC = () => {
           </div>
         </>
       )}
+
+      <RegisterRoomFooter
+        isValid={false}
+        prevHref="/"
+        nextHref="/room/register/bedrooms"
+      />
     </Conatainer>
   );
 };
