@@ -3,9 +3,8 @@ import styled from "styled-components";
 import palette from "../../../styles/palette";
 import Selector from "../../common/Selector";
 import Counter from "../../common/Counter";
-import Button from "../../common/Button";
-import RegisterRoomBedTypes from "./RegisterRoomBedTypes";
 import RegisterRoomFooter from "./RegisterRoomFooter";
+import RegisterRoomBedList from "./RegisterRoomBedList";
 import { getNumber } from "../../../lib/utils";
 import { bedroomCountList } from "../../../lib/staticData";
 import { useSelector } from "../../../store";
@@ -75,49 +74,56 @@ const Conatainer = styled.div`
   }
 
   .register-room-bed-type-bedroom-texts {
-    margin-bottom : 28px;
+    margin-bottom: 28px;
   }
 
   .register-room-bed-type-bedroom {
     font-size: 19px;
     color: ${palette.gray_48};
   }
-
 `;
 
 const RegisterRoomBedrooms: React.FC = () => {
-  const maximumGuestCount = useSelector((state) => state.registerRoom.maximumGuestCount);
+  const maximumGuestCount = useSelector(
+    (state) => state.registerRoom.maximumGuestCount
+  );
   const bedroomCount = useSelector((state) => state.registerRoom.bedroomCount);
   const bedCount = useSelector((state) => state.registerRoom.bedCount);
-  const bedList = useSelector((state) => state.registerRoom.bedList);
 
   const dispatch = useDispatch();
 
   // 최대 숙박 인원 변경시
   const onChangeMaximumGuestCount = (value: number) => {
-    dispatch(registerRoomActions.actions.setMaximumGuestCount(value))
-  }
+    dispatch(registerRoomActions.actions.setMaximumGuestCount(value));
+  };
 
   // 침실 개수 변경 시
-  const onChangeBedroomCount = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(registerRoomActions.actions.setBedroomCount(getNumber(event.target.value) || 0));
-  }
+  const onChangeBedroomCount = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    dispatch(
+      registerRoomActions.actions.setBedroomCount(
+        getNumber(event.target.value) || 0
+      )
+    );
+  };
 
   // 침대 개수 변경 시
   const onChangeBedCount = (value: number) => {
     dispatch(registerRoomActions.actions.setBedCount(value));
-  }
+  };
 
   return (
     <Conatainer>
       <h2>숙소에 얼마나 많은 인원이 숙박할 수 있나요?</h2>
       <h3>2단계</h3>
       <p className="room-register-step-info">
-        모든 게스트가 편안하게 숙박할 수 있도록 침대가 충분히 구비되어 있는지 확인하세요.
+        모든 게스트가 편안하게 숙박할 수 있도록 침대가 충분히 구비되어 있는지
+        확인하세요.
       </p>
       <div className="register-room-maximum-guest-count-wrapper">
         <Counter
-          label='최대 숙박 인원'
+          label="최대 숙박 인원"
           value={maximumGuestCount}
           onChange={onChangeMaximumGuestCount}
         />
@@ -130,8 +136,8 @@ const RegisterRoomBedrooms: React.FC = () => {
           onChange={onChangeBedroomCount}
           label="게스트가 사용할 수 있는 침실은 몇 개인가요?"
           options={bedroomCountList}
-        >
-        </Selector>
+          isValid={!!bedroomCount}
+        ></Selector>
       </div>
 
       <div className="register-room-bed-count-wrapper">
@@ -140,19 +146,16 @@ const RegisterRoomBedrooms: React.FC = () => {
 
       <h4>침대 유형</h4>
       <p className="register-room-bed-type-info">
-        각 침대에 놓인 침대 유형을 명시하면 숙소에 침대가 어떻게 구비되어 있는지 게스트가 잘 파악할 수 있습니다.
+        각 침대에 놓인 침대 유형을 명시하면 숙소에 침대가 어떻게 구비되어 있는지
+        게스트가 잘 파악할 수 있습니다.
       </p>
 
-      <ul className="register-room-bed-type-list-wrapper">
-        {bedList.map((bedroom, idx) => (
-          <RegisterRoomBedTypes bedroom={bedroom} key={idx} />
-        ))}
-      </ul>
+      <RegisterRoomBedList />
 
       <RegisterRoomFooter
-        // isValid={isValid}
-        prevHref="/"
-        nextHref="/room/register/bedrooms"
+        isValid={!!bedroomCount}
+        prevHref="/room/register/building"
+        nextHref="/room/register/bathroom"
       />
     </Conatainer>
   );
