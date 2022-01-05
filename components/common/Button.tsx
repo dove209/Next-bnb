@@ -57,6 +57,7 @@ const Container = styled.button<StyledButtonProps>`
   font-weight: 700;
   outline: none;
   cursor: pointer;
+  width: 100%;
   width: ${(props) => props.width};
   ${(props) => getButtonColor(props.color || '', props.colorReverse)};
   

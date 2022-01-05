@@ -49,7 +49,7 @@ const initialState: RegisterRoomState = {
     // 욕실 유형
     bathroomType: null,
     // 국가/지역
-    country: '',
+    country: '국가/지역 선택',
     // 시/도
     city: '',
     // 시/군/군

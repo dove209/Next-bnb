@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import palette from '../../../styles/palette';
 import NavigationIcon from '../../../public/static/svg/register/navigation.svg';
@@ -9,6 +9,8 @@ import { countryList } from '../../../lib/staticData';
 import { useDispatch } from 'react-redux';
 import { registerRoomActions } from '../../../store/registerRoom';
 import { useSelector } from '../../../store';
+
+import { getLocationIofoAPI } from '../../../lib/api/map';
 
 const Container = styled.div`
     padding: 62px 30px 100px;
@@ -60,12 +62,14 @@ const Container = styled.div`
 `;
 
 const RegisterRoomLocation: React.FC = () => {
+    const [loading, setLoading] = useState(false);
+
     const country = useSelector((state) => state.registerRoom.country);
     const city = useSelector((state) => state.registerRoom.city);
     const district = useSelector((state) => state.registerRoom.district);
     const streetAddress = useSelector((state) => state.registerRoom.streetAddress);
     const detailAddress = useSelector((state) => state.registerRoom.detailAddress);
-    const postcode = useSelector((state) => state.registerRoom.country);
+    const postcode = useSelector((state) => state.registerRoom.postcode);
 
     const dispatch = useDispatch();
 
@@ -96,14 +100,27 @@ const RegisterRoomLocation: React.FC = () => {
 
     // 현재 위치 불러오기 성공했을 때
     type Coordinates = { latitude: number, longitude: number };
-    const onSuccessGetLocation = (coords: Coordinates): void => {
-        console.log('위도', coords.latitude)
-        console.log('경도', coords.longitude)
+    const onSuccessGetLocation = async (coords: Coordinates) => {
+        try {
+            const { data: currentLocation } = await getLocationIofoAPI({ latitude: coords.latitude, longitude: coords.longitude });
+            dispatch(registerRoomActions.actions.setCountry(currentLocation.country))
+            dispatch(registerRoomActions.actions.setCity(currentLocation.city))
+            dispatch(registerRoomActions.actions.setDistrict(currentLocation.district))
+            dispatch(registerRoomActions.actions.setStreetAddress(currentLocation.streetAddress))
+            dispatch(registerRoomActions.actions.setPostcode(currentLocation.postcode))
+            dispatch(registerRoomActions.actions.setLatitude(currentLocation.latitude))
+            dispatch(registerRoomActions.actions.setLongitude(currentLocation.longitude))
+            console.log(currentLocation)
+        } catch (e) {
+            console.log(e)
+        }
+        setLoading(false);
     }
 
 
     // 현재 위치 사용 클릭 시
     const onClickGetCurrentLocation = () => {
+        setLoading(true);
         navigator.geolocation.getCurrentPosition(({ coords }) => onSuccessGetLocation(coords), (e) => {
             console.log(e);
             alert(e?.message)
@@ -124,7 +141,7 @@ const RegisterRoomLocation: React.FC = () => {
                     icon={<NavigationIcon />}
                     onClick={onClickGetCurrentLocation}
                 >
-                    현재 위치 사용
+                    {loading ? "불러오는 중....." : "현재 위치 사용"}
                 </Button>
             </div>
             <div className='register-room-location-country-selector-wrapper'>
@@ -132,7 +149,6 @@ const RegisterRoomLocation: React.FC = () => {
                     type='register'
                     options={countryList}
                     useValidation={false}
-                    defaultValue='국가/지역 선택'
                     disabledOptions={['국가/지역 선택']}
                     value={country}
                     onChange={onChangeCountry}
