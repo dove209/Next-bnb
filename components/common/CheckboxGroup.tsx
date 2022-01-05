@@ -66,7 +66,6 @@ const Container = styled.div`
         width: 18px;
         height: 18px;
         display: inline-table;
-
         border: 0;
         border-radius: 2px;
         position: absolute;
