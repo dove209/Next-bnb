@@ -59,9 +59,17 @@ const Container = styled.div<InputContainerProps>`
         border-color: ${palette.dark_cyan};
       }
     `}
+
+  label {
+    span {
+      display: block;
+      margin-bottom: 8px;
+    }
+  }
 `;
 
 interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
   icon?: JSX.Element; //icon: JSX.Element | undefined; 같은거
   isValid?: boolean;
   validataMode?: boolean;
@@ -70,6 +78,7 @@ interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input: React.FC<IProps> = ({
+  label,
   icon,
   isValid = false,
   useValidation = true,
@@ -83,10 +92,20 @@ const Input: React.FC<IProps> = ({
       isValid={isValid}
       useValidation={validataMode && useValidation}
     >
-      <input {...props} />
-      {icon}
-      {useValidation && validataMode && !isValid && errorMessage && (
-        <p className="input-error-message">{errorMessage}</p>
+      {label && (
+        <label>
+          <span>{label}</span>
+          <input {...props} />
+        </label>
+      )}
+      {!label && (
+        <>
+          <input {...props} />
+          {icon}
+          {useValidation && validataMode && !isValid && errorMessage && (
+            <p className="input-error-message">{errorMessage}</p>
+          )}
+        </>
       )}
     </Container>
   );

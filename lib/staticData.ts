@@ -146,3 +146,6 @@ export const bedTypes: BedType[] = [
     '해먹',
     '물침대',
 ];
+
+// 국가 리스트
+export const countryList = ['대한민국', '일본', '중국'];

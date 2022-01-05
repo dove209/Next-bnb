@@ -356,7 +356,7 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
       </div>
 
       <div className="sign-up-modal-submit-button-wrapper">
-        <Button type="submit" onClick={onSubmitSignUp}>
+        <Button type="submit" onClick={onSubmitSignUp} color='bittersweet'>
           가입하기
         </Button>
       </div>
