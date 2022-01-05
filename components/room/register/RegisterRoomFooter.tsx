@@ -24,7 +24,7 @@ const Container = styled.footer`
         color: ${palette.dark_cyan};
         cursor: pointer;
         svg {
-            margin-top: 8px;
+            margin-right: 8px;
         }
     }
 `;

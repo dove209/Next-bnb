@@ -5,6 +5,7 @@ import NavigationIcon from '../../../public/static/svg/register/navigation.svg';
 import Button from '../../common/Button';
 import Selector from '../../common/Selector';
 import Input from '../../common/Input';
+import RegisterRoomFooter from './RegisterRoomFooter';
 import { countryList } from '../../../lib/staticData';
 import { useDispatch } from 'react-redux';
 import { registerRoomActions } from '../../../store/registerRoom';
@@ -110,7 +111,6 @@ const RegisterRoomLocation: React.FC = () => {
             dispatch(registerRoomActions.actions.setPostcode(currentLocation.postcode))
             dispatch(registerRoomActions.actions.setLatitude(currentLocation.latitude))
             dispatch(registerRoomActions.actions.setLongitude(currentLocation.longitude))
-            console.log(currentLocation)
         } catch (e) {
             console.log(e)
         }
@@ -168,6 +168,10 @@ const RegisterRoomLocation: React.FC = () => {
                 <Input label='우편번호' value={postcode} onChange={onChangePostcode} />
             </div>
 
+            <RegisterRoomFooter
+                prevHref='/room/register/bathroom'
+                nextHref='/room/register/geometry'
+            />
         </Container>
     )
 }
