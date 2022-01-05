@@ -149,3 +149,19 @@ export const bedTypes: BedType[] = [
 
 // 국가 리스트
 export const countryList = ['대한민국', '일본', '중국'];
+
+// 편의 시설
+export const amentityList = [
+    '무선 인터넷',
+    'TV',
+    '난방',
+    '에어컨',
+    '다리미',
+    '샴푸',
+    '헤어 드라이어',
+    '조식, 커피, 차',
+    '업무가능 공간/책상',
+    '벽난로',
+    '옷장/서랍장',
+    '게스트 전용 출입문',
+];
