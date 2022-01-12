@@ -24,6 +24,7 @@ type RegisterRoomState = {
     amentities: string[],
     conveniences: string[],
     photos: string[],
+    description: string,
 };
 
 
@@ -72,11 +73,9 @@ const initialState: RegisterRoomState = {
     // 편의 공간
     conveniences: [],
     // 숙소 사진
-    photos: [
-        'https://gini-bucket.s3.ap-northeast-2.amazonaws.com/room_image_1__306843a0-c2cf-4a4c-b0bb-16c32a7c1f16.png',
-        'https://gini-bucket.s3.ap-northeast-2.amazonaws.com/room_image_1__306843a0-c2cf-4a4c-b0bb-16c32a7c1f16.png',
-        'https://gini-bucket.s3.ap-northeast-2.amazonaws.com/room_image_1__306843a0-c2cf-4a4c-b0bb-16c32a7c1f16.png',
-    ],
+    photos: [],
+    // 숙소 설명
+    description: '',
 };
 
 const registerRoom = createSlice({
@@ -226,6 +225,10 @@ const registerRoom = createSlice({
         // 숙소 사진 변경하기
         setPhotos(state, action: PayloadAction<string[]>) {
             state.photos = action.payload;
+        },
+        // 숙소 설명 변경하기
+        setDescription(state, action: PayloadAction<string>) {
+            state.description = action.payload;
         },
     },
 });
