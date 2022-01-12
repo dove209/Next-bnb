@@ -22,3 +22,10 @@ export const getNumber = (string: string) => {
     }
     return null;
 };
+
+
+// 금액 변경시
+export const makeMoneyString = (input: string) => {
+    const numberPrice = Number(input).toLocaleString('ko-KR');
+    return numberPrice;
+}
