@@ -72,7 +72,11 @@ const initialState: RegisterRoomState = {
     // 편의 공간
     conveniences: [],
     // 숙소 사진
-    photos: [],
+    photos: [
+        'https://gini-bucket.s3.ap-northeast-2.amazonaws.com/room_image_1__306843a0-c2cf-4a4c-b0bb-16c32a7c1f16.png',
+        'https://gini-bucket.s3.ap-northeast-2.amazonaws.com/room_image_1__306843a0-c2cf-4a4c-b0bb-16c32a7c1f16.png',
+        'https://gini-bucket.s3.ap-northeast-2.amazonaws.com/room_image_1__306843a0-c2cf-4a4c-b0bb-16c32a7c1f16.png',
+    ],
 };
 
 const registerRoom = createSlice({
