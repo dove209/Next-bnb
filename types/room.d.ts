@@ -13,3 +13,69 @@ export type BedType =
     | '유아용 침대'
     | '해먹'
     | '물침대';
+
+
+// 만들어진 숙소 타입
+export type StoredRoomType = {
+    id: number;
+    largeBuildingType: string | null;
+    buildingType: string | null;
+    roomType: string | null;
+    isSetUpForGuest: boolean | null;
+    maximumGuestCount: number;
+    bedroomCount: number;
+    bedCount: number;
+    bedList: { id: number; beds: { type: BedType; count: number }[] }[];
+    publicBedList: { type: BedType; count: number }[];
+    bathroomCount: number;
+    bathroomType: 'private' | 'public';
+    latitude: number;
+    longitude: number;
+    country: string;
+    city: string;
+    district: string;
+    streetAddress: string;
+    detailAddress: string;
+    postcode: string;
+    amentities: string[],
+    conveniences: string[],
+    photos: string[],
+    description: string,
+    title: string,
+    price: number,
+    startDate: Date;
+    endDate: Date;
+    createAt: Date;
+    updateAt: Date;
+    hostId: number;
+}
+
+export type RegisterRoomState = {
+    largeBuildingType: string | null;
+    buildingType: string | null;
+    roomType: string | null;
+    isSetUpForGuest: boolean | null;
+    maximumGuestCount: number;
+    bedroomCount: number;
+    bedCount: number;
+    bedList: { id: number; beds: { type: BedType; count: number }[] }[];
+    publicBedList: { type: BedType; count: number }[];
+    bathroomCount: number;
+    bathroomType: 'private' | 'public' | null;
+    country: string;
+    city: string;
+    district: string;
+    streetAddress: string;
+    detailAddress: string;
+    postcode: string;
+    latitude: number;
+    longitude: number;
+    amentities: string[],
+    conveniences: string[],
+    photos: string[],
+    description: string,
+    title: string,
+    price: number,
+    startDate: string | null;
+    endDate: string | null;
+};

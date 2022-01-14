@@ -1,36 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { BedType } from '../types/room';
-
-type RegisterRoomState = {
-    largeBuildingType: string | null;
-    buildingType: string | null;
-    roomType: string | null;
-    isSetUpForGeust: boolean | null;
-    maximumGuestCount: number;
-    bedroomCount: number;
-    bedCount: number;
-    bedList: { id: number; beds: { type: BedType; count: number }[] }[];
-    publicBedList: { type: BedType; count: number }[];
-    bathroomCount: number;
-    bathroomType: 'private' | 'public' | null;
-    country: string;
-    city: string;
-    district: string;
-    streetAddress: string;
-    detailAddress: string;
-    postcode: string;
-    latitude: number;
-    longitude: number;
-    amentities: string[],
-    conveniences: string[],
-    photos: string[],
-    description: string,
-    title: string,
-    price: number,
-    startDate: string | null;
-    endDate: string | null;
-};
-
+import { BedType, RegisterRoomState } from '../types/room';
 
 // 초기 상태
 const initialState: RegisterRoomState = {
@@ -41,7 +10,7 @@ const initialState: RegisterRoomState = {
     // 숙소 유형
     roomType: null,
     // 게스트만을 위해 만들어진 숙소인가
-    isSetUpForGeust: null,
+    isSetUpForGuest: null,
     // 최대 숙박 인원
     maximumGuestCount: 1,
     // 침실 개수
@@ -117,7 +86,7 @@ const registerRoom = createSlice({
         },
         // 게스트용 숙소인지 변경하기
         setIsSetUpForGuest(state, action: PayloadAction<boolean>) {
-            state.isSetUpForGeust = action.payload;
+            state.isSetUpForGuest = action.payload;
             return state;
         },
         // 최대 숙박 인원 변경하기
