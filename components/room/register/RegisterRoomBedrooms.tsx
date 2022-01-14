@@ -94,7 +94,7 @@ const RegisterRoomBedrooms: React.FC = () => {
 
   // 최대 숙박 인원 변경시
   const onChangeMaximumGuestCount = (value: number) => {
-    dispatch(registerRoomActions.actions.setMaximumGuestCount(value));
+    dispatch(registerRoomActions.setMaximumGuestCount(value));
   };
 
   // 침실 개수 변경 시
@@ -102,7 +102,7 @@ const RegisterRoomBedrooms: React.FC = () => {
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     dispatch(
-      registerRoomActions.actions.setBedroomCount(
+      registerRoomActions.setBedroomCount(
         getNumber(event.target.value) || 0
       )
     );
@@ -110,7 +110,7 @@ const RegisterRoomBedrooms: React.FC = () => {
 
   // 침대 개수 변경 시
   const onChangeBedCount = (value: number) => {
-    dispatch(registerRoomActions.actions.setBedCount(value));
+    dispatch(registerRoomActions.setBedCount(value));
   };
 
   return (

@@ -34,12 +34,12 @@ const RegisterRoomPrice: React.FC = () => {
 
         // 인풋 값이 비워지면 price 0으로 변경
         if (!input) {
-            dispatch(registerRoomActions.actions.setPrice(0))
+            dispatch(registerRoomActions.setPrice(0))
         }
 
         const numberPrice = Number(input.replace(/,/g, ""));
         if (numberPrice) {
-            dispatch(registerRoomActions.actions.setPrice(numberPrice));
+            dispatch(registerRoomActions.setPrice(numberPrice));
         }
     }
     return (

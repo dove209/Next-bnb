@@ -1,12 +1,11 @@
-import type { NextPage } from "next";
-import styled from "styled-components";
+import React from 'react';
+import { NextPage } from "next";
+import Home from '../components/home/Home';
 
-const Container = styled.div`
-  font-size: 24px;
-`;
 
-const Home: NextPage = () => {
-  return <Container>hello world 안녕</Container>;
+
+const index: NextPage = () => {
+  return <Home />;
 };
 
-export default Home;
+export default index;

@@ -49,14 +49,14 @@ const RegisterRoomBathroom: React.FC = () => {
                     label='욕실'
                     increaseNum={0.5}
                     value={bathroomCount}
-                    onChange={(value) => dispatch(registerRoomActions.actions.setBathroomCount(value))}
+                    onChange={(value) => dispatch(registerRoomActions.setBathroomCount(value))}
                 />
             </div>
             <RadioGroup
                 label='게스트가 단독으로 사용하는 욕실 인가요?'
                 value={bathroomType}
                 isValid={!!bathroomType}
-                onChange={(value) => dispatch(registerRoomActions.actions.setBathroomType(value))}
+                onChange={(value) => dispatch(registerRoomActions.setBathroomType(value))}
                 options={[
                     { value: 'private', label: '예' },
                     { value: 'public', label: '아니요' }

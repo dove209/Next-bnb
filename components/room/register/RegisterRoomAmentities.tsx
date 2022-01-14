@@ -33,7 +33,7 @@ const RegisterRoomAmentities: React.FC = () => {
     const amentities = useSelector((state) => state.registerRoom.amentities);
 
     const onChangeAmentities = (selected: string[]) => {
-        dispatch(registerRoomActions.actions.setAmentities(selected))
+        dispatch(registerRoomActions.setAmentities(selected))
     };
 
     return (

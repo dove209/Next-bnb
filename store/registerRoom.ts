@@ -230,7 +230,7 @@ const registerRoom = createSlice({
     },
 });
 
-export const registerRoomActions = { ...registerRoom };
+export const registerRoomActions = { ...registerRoom.actions };
 
 export default registerRoom;
 

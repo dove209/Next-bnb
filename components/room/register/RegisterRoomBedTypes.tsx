@@ -82,7 +82,7 @@ const RegisterRoomBedTypes: React.FC<IProps> = ({ bedroom }) => {
 
     // 침실 침대 개수 변경 시
     const onChangeBedTypeCount = (value: number, type: BedType) => {
-        dispatch(registerRoomActions.actions.setBedTypeCount({
+        dispatch(registerRoomActions.setBedTypeCount({
             bedroomId: bedroom.id,
             type,
             count: value

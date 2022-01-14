@@ -38,7 +38,7 @@ const RegisterRoomDescription: React.FC = () => {
 
     // 숙소 설명 변경 시
     const onChangeDescription = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        dispatch(registerRoomActions.actions.setDescription(e.target.value));
+        dispatch(registerRoomActions.setDescription(e.target.value));
     }
 
     return (

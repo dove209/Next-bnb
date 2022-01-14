@@ -1,0 +1,34 @@
+import React from 'react';
+import styled from 'styled-components';
+import SearchRoomBar from './searchRoomBar/SearchRoomBar';
+import palette from '../../styles/palette';
+
+const Conatainer = styled.div`
+    width:100%;
+    padding: 0 80px;
+
+    .home-search-bar-label {
+        margin: 32px 0 16px;
+        font-weight: 600;
+        font-size: 14px;
+    }
+    h2 {
+        width: 557px;
+        margin: 88px 0 60px;
+        font-size: 50px;
+        color: ${palette.cardinal};
+    }
+`;
+
+
+const Home: React.FC = () => {
+    return (
+        <Conatainer>
+            <p className='home-search-bar-label'>숙소</p>
+            <SearchRoomBar />
+            <h2>가아운 여행지, 에어비엔비와 탐험해보세요.</h2>
+        </Conatainer>
+    )
+}
+
+export default Home;

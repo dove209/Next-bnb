@@ -67,7 +67,7 @@ const RegisterRoomPhoto: React.FC = () => {
             try {
                 const { data } = await uploadFileAPI(formdata);
                 if (data) {
-                    dispatch(registerRoomActions.actions.setPhotos([...photos, data]))
+                    dispatch(registerRoomActions.setPhotos([...photos, data]))
                 }
             } catch (e) {
                 console.log(e)

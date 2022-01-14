@@ -130,7 +130,7 @@ const RegisterRoomPhotoCardList: React.FC<IProps> = ({ photos }) => {
                 formData.append('file', file);
                 uploadFileAPI(formData)
                     .then(({ data }) => {
-                        dispatch(registerRoomActions.actions.setPhotos([...photos, data]));
+                        dispatch(registerRoomActions.setPhotos([...photos, data]));
                     })
                     .catch((e) => console.log(e));
             }
@@ -142,7 +142,7 @@ const RegisterRoomPhotoCardList: React.FC<IProps> = ({ photos }) => {
     const deletePhoto = (index: number) => {
         const newPhotos = [...photos];
         newPhotos.splice(index, 1);
-        dispatch(registerRoomActions.actions.setPhotos(newPhotos));
+        dispatch(registerRoomActions.setPhotos(newPhotos));
     }
 
     // 사진 수정하기
@@ -159,7 +159,7 @@ const RegisterRoomPhotoCardList: React.FC<IProps> = ({ photos }) => {
                     .then(({ data }) => {
                         const newPhotos = [...photos];
                         newPhotos[index] = data;
-                        dispatch(registerRoomActions.actions.setPhotos(newPhotos));
+                        dispatch(registerRoomActions.setPhotos(newPhotos));
                     })
                     .catch((e) => console.log(e))
             }

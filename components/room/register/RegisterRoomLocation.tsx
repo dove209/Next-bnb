@@ -76,27 +76,27 @@ const RegisterRoomLocation: React.FC = () => {
 
     // 나라 변경 시
     const onChangeCountry = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        dispatch(registerRoomActions.actions.setCountry(event.target.value));
+        dispatch(registerRoomActions.setCountry(event.target.value));
     }
     // 시/도 변경 시
     const onChangeCity = (event: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(registerRoomActions.actions.setCity(event.target.value));
+        dispatch(registerRoomActions.setCity(event.target.value));
     }
     // 시/군/구 변경 시
     const onChangeDistrict = (event: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(registerRoomActions.actions.setDistrict(event.target.value));
+        dispatch(registerRoomActions.setDistrict(event.target.value));
     }
     // 도로명주소 변경 시
     const onChangeStreetAddress = (event: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(registerRoomActions.actions.setStreetAddress(event.target.value));
+        dispatch(registerRoomActions.setStreetAddress(event.target.value));
     }
     // 동호수 변경 시
     const onChangeDetailAddress = (event: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(registerRoomActions.actions.setDetailAddress(event.target.value));
+        dispatch(registerRoomActions.setDetailAddress(event.target.value));
     }
     // 우편번호 변경시
     const onChangePostcode = (event: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(registerRoomActions.actions.setPostcode(event.target.value));
+        dispatch(registerRoomActions.setPostcode(event.target.value));
     }
 
     // 현재 위치 불러오기 성공했을 때
@@ -104,13 +104,13 @@ const RegisterRoomLocation: React.FC = () => {
     const onSuccessGetLocation = async (coords: Coordinates) => {
         try {
             const { data: currentLocation } = await getLocationIofoAPI({ latitude: coords.latitude, longitude: coords.longitude });
-            dispatch(registerRoomActions.actions.setCountry(currentLocation.country))
-            dispatch(registerRoomActions.actions.setCity(currentLocation.city))
-            dispatch(registerRoomActions.actions.setDistrict(currentLocation.district))
-            dispatch(registerRoomActions.actions.setStreetAddress(currentLocation.streetAddress))
-            dispatch(registerRoomActions.actions.setPostcode(currentLocation.postcode))
-            dispatch(registerRoomActions.actions.setLatitude(currentLocation.latitude))
-            dispatch(registerRoomActions.actions.setLongitude(currentLocation.longitude))
+            dispatch(registerRoomActions.setCountry(currentLocation.country))
+            dispatch(registerRoomActions.setCity(currentLocation.city))
+            dispatch(registerRoomActions.setDistrict(currentLocation.district))
+            dispatch(registerRoomActions.setStreetAddress(currentLocation.streetAddress))
+            dispatch(registerRoomActions.setPostcode(currentLocation.postcode))
+            dispatch(registerRoomActions.setLatitude(currentLocation.latitude))
+            dispatch(registerRoomActions.setLongitude(currentLocation.longitude))
         } catch (e) {
             console.log(e)
         }

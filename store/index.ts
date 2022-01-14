@@ -5,8 +5,8 @@ import { AnyAction, Store } from 'redux';
 import user from './user';
 import common from "./common";
 import auth from './auth';
-
 import registerRoom from "./registerRoom";
+import searchRoom from './searchRoom';
 
 
 const rootReducer = combineReducers({
@@ -14,6 +14,7 @@ const rootReducer = combineReducers({
     user: user.reducer,
     auth: auth.reducer,
     registerRoom: registerRoom.reducer,
+    searchRoom: searchRoom.reducer,
 })
 
 // 스토어 타입

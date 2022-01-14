@@ -92,8 +92,8 @@ const RegisterRoomGeometry: React.FC = () => {
                 const centerLat = map.getCenter().lat();
                 const centerLng = map.getCenter().lng();
                 marker.setPosition({ lat: centerLat, lng: centerLng })
-                dispatch(registerRoomActions.actions.setLatitude(centerLat));
-                dispatch(registerRoomActions.actions.setLongitude(centerLng));
+                dispatch(registerRoomActions.setLatitude(centerLat));
+                dispatch(registerRoomActions.setLongitude(centerLng));
             }, 150)
             );
         }

@@ -63,12 +63,12 @@ const RegisterRoomDate: React.FC = () => {
 
     // 예약 시작 날짜 변경 시
     const onChangeStartDate = (date: Date | null) => {
-        dispatch(registerRoomActions.actions.setStartDate(date ? date.toISOString() : null));
+        dispatch(registerRoomActions.setStartDate(date ? date.toISOString() : null));
     };
 
     // 예약 종료 날짜 변경 시
     const onChangeEndDate = (date: Date | null) => {
-        dispatch(registerRoomActions.actions.setEndDate(date ? date.toISOString() : null))
+        dispatch(registerRoomActions.setEndDate(date ? date.toISOString() : null))
     }
 
     return (

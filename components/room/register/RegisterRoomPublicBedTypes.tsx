@@ -108,7 +108,7 @@ const RegisterRoomPublicBedTypes: React.FC = () => {
                 key={type}
                 onChange={(value) =>
                   dispatch(
-                    registerRoomActions.actions.setPublicBedTypeCount({
+                    registerRoomActions.setPublicBedTypeCount({
                       type,
                       count: value,
                     })

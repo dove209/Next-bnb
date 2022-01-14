@@ -33,7 +33,7 @@ const RegisterRoomConveniences: React.FC = () => {
     const conveniences = useSelector((state) => state.registerRoom.conveniences);
 
     const onChangeConveniences = (selected: string[]) => {
-        dispatch(registerRoomActions.actions.setConveniences(selected));
+        dispatch(registerRoomActions.setConveniences(selected));
     }
     return (
         <Container>
