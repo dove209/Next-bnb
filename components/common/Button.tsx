@@ -6,7 +6,7 @@ import palette from "../../styles/palette";
 const getButtonColor = (color: string, colorRevers: boolean) => {
   if (colorRevers) {
     switch (color) {
-      case 'dark_cyan':
+      case "dark_cyan":
         return css`
           border: 2px solid ${palette.dark_cyan};
           color: ${palette.dark_cyan};
@@ -21,14 +21,19 @@ const getButtonColor = (color: string, colorRevers: boolean) => {
     }
   }
   switch (color) {
-    case 'dark_cyan':
+    case "dark_cyan":
       return css`
         background-color: ${palette.dark_cyan};
         color: #fff;
       `;
-    case 'bittersweet':
+    case "bittersweet":
       return css`
         background-color: ${palette.bittersweet};
+        color: #fff;
+      `;
+    case "amaranth":
+      return css`
+        background-color: ${palette.amaranth};
         color: #fff;
       `;
     default:
@@ -41,27 +46,26 @@ const getButtonColor = (color: string, colorRevers: boolean) => {
 };
 
 // 버튼 크기 구하기
-const getButtonSize = (size: 'small' | 'medium') => {
+const getButtonSize = (size: "small" | "medium") => {
   switch (size) {
-    case 'medium':
+    case "medium":
       return css`
         height: 48px;
       `;
-    case 'small':
+    case "small":
       return css`
         height: 36px;
         font-size: 14px;
       `;
     default:
-      return '';
+      return "";
   }
-}
-
+};
 
 interface StyledButtonProps {
   width: string | undefined;
   colorReverse: boolean;
-  size: 'small' | 'medium';
+  size: "small" | "medium";
 }
 
 const Container = styled.button<StyledButtonProps>`
@@ -78,12 +82,12 @@ const Container = styled.button<StyledButtonProps>`
   cursor: pointer;
   width: 100%;
   width: ${(props) => props.width};
-  ${(props) => getButtonColor(props.color || '', props.colorReverse)};
+  ${(props) => getButtonColor(props.color || "", props.colorReverse)};
   ${(props) => getButtonSize(props.size)};
   svg {
     margin-right: 12px;
   }
-`
+`;
 
 interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
@@ -91,12 +95,26 @@ interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   width?: string;
   colorReverse?: boolean;
   icon?: JSX.Element;
-  size?: 'small' | 'medium';
+  size?: "small" | "medium";
 }
 
-const Button: React.FC<IProps> = ({ children, color, width, colorReverse = false, icon, size = 'medium', ...props }) => {
+const Button: React.FC<IProps> = ({
+  children,
+  color,
+  width,
+  colorReverse = false,
+  icon,
+  size = "medium",
+  ...props
+}) => {
   return (
-    <Container {...props} color={color} width={width} colorReverse={colorReverse} size={size} >
+    <Container
+      {...props}
+      color={color}
+      width={width}
+      colorReverse={colorReverse}
+      size={size}
+    >
       {icon}
       {children}
     </Container>
