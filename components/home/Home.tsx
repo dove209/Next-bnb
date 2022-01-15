@@ -26,7 +26,7 @@ const Home: React.FC = () => {
         <Conatainer>
             <p className='home-search-bar-label'>숙소</p>
             <SearchRoomBar />
-            <h2>가아운 여행지, 에어비엔비와 탐험해보세요.</h2>
+            <h2>가까운 여행지, 에어비엔비와 탐험해보세요.</h2>
         </Conatainer>
     )
 }
