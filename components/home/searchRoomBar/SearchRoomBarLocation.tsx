@@ -8,7 +8,6 @@ import { searchRoomActions } from "../../../store/searchRoom";
 import { searchPlacesAPI, getPlaceAPI } from "../../../lib/api/map";
 import { isEmpty } from "lodash";
 import useDebuonce from "../../../hooks/useDebounce";
-import places from "../../../pages/api/maps/places";
 
 const Container = styled.div`
   position: relative;
@@ -85,7 +84,7 @@ const SearchRoomBarLocation: React.FC = () => {
 
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  //   장소 검색하기
+  // 장소 검색하기
   const searchPlaces = async () => {
     try {
       const { data } = await searchPlacesAPI(encodeURI(location));
