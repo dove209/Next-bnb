@@ -74,7 +74,6 @@ interface IProps {
 
 const RoomListMap: React.FC<IProps> = ({ setShowMap }) => {
     const rooms = useSelector((state) => state.room.rooms);
-    console.log(rooms)
     const mapRef = useRef<HTMLDivElement>(null);
     const [currentLocation, setCurrentLocation] = useState({
         latitude: 37.5666784,
@@ -119,6 +118,7 @@ const RoomListMap: React.FC<IProps> = ({ setShowMap }) => {
     }, [])
 
     useEffect(() => {
+        console.log('지도 생성')
         loadMap()
     }, [rooms, currentLocation])
 
